@@ -13,7 +13,7 @@ type Parameters struct {
 	Cmd         string
 	Host        string
 	Scale       bool
-	CallBackUrl string
+	CallbackURL string
 }
 
 // Representation of a full marathon response
@@ -28,11 +28,11 @@ type Response struct {
 // Marathon application see :
 // https://github.com/mesosphere/marathon/blob/master/REST.md#apps
 type Application struct {
-	Id            string            `json:"id"`
+	ID            string            `json:"id"`
 	Cmd           string            `json:"cmd,omitempty"`
 	Constraints   [][]string        `json:"constraints,omitempty"`
 	Container     *Container        `json:"container,omitempty"`
-	Cpu           int               `json:"cpu,omitempty"`
+	CPU           int               `json:"cpu,omitempty"`
 	Env           map[string]string `json:"env,omitempty"`
 	Executor      string            `json:"executor,omitempty"`
 	HealtChecks   []*HealthCheck    `json:"healtChecks,omitempty"`
@@ -72,9 +72,9 @@ type HealthCheck struct {
 // Tasks are described here:
 // https://github.com/mesosphere/marathon/blob/master/REST.md#tasks
 type Task struct {
-	Appid     string `json:"appId"`
+	appID     string `json:"appId"`
 	Host      string `json:"host"`
-	Id        string `json:"id"`
+	ID        string `json:"id"`
 	Ports     []int  `json:"ports"`
 	StagedAt  string `json:"stagedAt"`
 	StartedAt string `json:"startedAt"`
@@ -84,8 +84,8 @@ type Task struct {
 // EventsSubscription are described here :
 // https://github.com/mesosphere/marathon/blob/master/REST.md#event-subscriptions
 type EventSubscriptions struct {
-	CallbackUrl  string   `json:"callbackUrl"`
-	ClientIp     string   `json:"clientIp"`
+	CallbackURL  string   `json:"CallbackUrl"`
+	ClientIP     string   `json:"ClientIp"`
 	EventType    string   `json:"eventType"`
-	CallbackUrls []string `json:"callbackUrls"`
+	CallbackURLs []string `json:"CallbackUrls"`
 }

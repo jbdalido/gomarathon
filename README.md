@@ -1,6 +1,8 @@
 Go client for marathon
 ======================
 
+[![GoDoc](https://godoc.org/github.com/jbdalido/gomarathon?status.svg)](https://godoc.org/github.com/jbdalido/gomarathon)
+
 _* This is a beta_
 
 This is a small go client to use with **[Marathon api v2](https://github.com/mesosphere/marathon/blob/master/REST.md)**. All endpoints are handled (EventSubscriptions have not yet been tested).

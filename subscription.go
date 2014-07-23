@@ -5,12 +5,13 @@ import (
 	"net/url"
 )
 
-func (c *Client) RegisterCallbackUrl(uri string) (*Response, error) {
+// Register a new callback url
+func (c *Client) RegisterCallbackURL(uri string) (*Response, error) {
 	options := &RequestOptions{
 		Path:   "eventSubscriptions",
 		Method: "POST",
 		Params: &Parameters{
-			CallBackUrl: url.QueryEscape(uri),
+			CallbackURL: url.QueryEscape(uri),
 		},
 	}
 	r, err := c.request(options)
@@ -22,6 +23,7 @@ func (c *Client) RegisterCallbackUrl(uri string) (*Response, error) {
 	return nil, err
 }
 
+// Get all registered callback url
 func (c *Client) GetEventSubscriptions() (*Response, error) {
 	options := &RequestOptions{
 		Path: "eventSubscriptions",
@@ -36,12 +38,13 @@ func (c *Client) GetEventSubscriptions() (*Response, error) {
 	return r, nil
 }
 
-func (c *Client) DeleteCallbackUrl(uri string) (*Response, error) {
+// Delete a particular callback url
+func (c *Client) DeleteCallbackURL(uri string) (*Response, error) {
 	options := &RequestOptions{
 		Path:   "eventSubscriptions",
 		Method: "DELETE",
 		Params: &Parameters{
-			CallBackUrl: url.QueryEscape(uri),
+			CallbackURL: url.QueryEscape(uri),
 		},
 	}
 	r, err := c.request(options)

@@ -1,4 +1,4 @@
-// Package gomarathon provides a client to interact with a marathon
+// Package gomarathon provIDes a client to interact with a marathon
 // api. on http or https
 package gomarathon
 
@@ -17,24 +17,25 @@ import (
 // and the host url
 type Client struct {
 	Host       *url.URL
-	HttpClient *http.Client
+	HTTPClient *http.Client
 }
 
+// Actual version of the marathon api
 const (
-	API_VERSION = "/v2"
+	ApiVersion = "/v2"
 )
 
-// Return a pointer to the new client
+// NewClient return a pointer to the new client
 func NewClient(host string, tlsConfig *tls.Config) (*Client, error) {
-	// Validate url
+	// ValIDate url
 	h, err := url.Parse(host)
 	if err != nil {
-		return nil, fmt.Errorf("Can't parse host %s", host)
+		return nil, fmt.Errorf("can't parse host %s", host)
 	}
 
 	return &Client{
 		Host:       h,
-		HttpClient: newHTTPClient(h, tlsConfig),
+		HTTPClient: newHTTPClient(h, tlsConfig),
 	}, nil
 }
 
@@ -60,7 +61,7 @@ func (c *Client) do(method, path string, data interface{}) ([]byte, int, error) 
 	req.Header.Set("User-Agent", "gomarathon")
 	req.Header.Set("Content-Type", "application/json")
 
-	resp, err = c.HttpClient.Do(req)
+	resp, err = c.HTTPClient.Do(req)
 	if err != nil {
 		return nil, -1, err
 	}
@@ -91,7 +92,7 @@ func (c *Client) request(options *RequestOptions) (*Response, error) {
 		options.Method = "GET"
 	}
 
-	path := fmt.Sprintf("%s/%s", API_VERSION, options.Path)
+	path := fmt.Sprintf("%s/%s", ApiVersion, options.Path)
 
 	if options.Params != nil {
 		v := url.Values{}
@@ -108,8 +109,8 @@ func (c *Client) request(options *RequestOptions) (*Response, error) {
 			v.Set("scale", "true")
 		}
 
-		if options.Params.CallBackUrl != "" {
-			v.Set("CallbackUrl", url.QueryEscape(options.Params.CallBackUrl))
+		if options.Params.CallbackURL != "" {
+			v.Set("CallbackURL", url.QueryEscape(options.Params.CallbackURL))
 		}
 
 		path = fmt.Sprintf("%s?%s", path, v.Encode())

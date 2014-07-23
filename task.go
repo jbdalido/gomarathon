@@ -16,9 +16,9 @@ func (c *Client) ListTasks() (*Response, error) {
 	return r, nil
 }
 
-func (c *Client) GetAppTasks(appId string) (*Response, error) {
+func (c *Client) GetAppTasks(appID string) (*Response, error) {
 	options := &RequestOptions{
-		Path: fmt.Sprintf("apps/%s/tasks", appId),
+		Path: fmt.Sprintf("apps/%s/tasks", appID),
 	}
 	r, err := c.request(options)
 	if err != nil {
@@ -27,9 +27,9 @@ func (c *Client) GetAppTasks(appId string) (*Response, error) {
 	return r, nil
 }
 
-func (c *Client) KillTasks(appId string, host string, scale bool) (*Response, error) {
+func (c *Client) KillTasks(appID string, host string, scale bool) (*Response, error) {
 	options := &RequestOptions{
-		Path:   fmt.Sprintf("apps/%s/tasks", appId),
+		Path:   fmt.Sprintf("apps/%s/tasks", appID),
 		Method: "DELETE",
 		Params: &Parameters{
 			Host:  host,
@@ -45,9 +45,9 @@ func (c *Client) KillTasks(appId string, host string, scale bool) (*Response, er
 	return nil, err
 }
 
-func (c *Client) KillTask(appId string, taskId string, scale bool) (*Response, error) {
+func (c *Client) KillTask(appID string, taskID string, scale bool) (*Response, error) {
 	options := &RequestOptions{
-		Path:   fmt.Sprintf("apps/%s/tasks/%s", appId, taskId),
+		Path:   fmt.Sprintf("apps/%s/tasks/%s", appID, taskID),
 		Method: "DELETE",
 		Params: &Parameters{
 			Scale: scale,

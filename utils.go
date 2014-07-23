@@ -17,7 +17,7 @@ func newHTTPClient(u *url.URL, tlsConfig *tls.Config) *http.Client {
 			return net.Dial("unix", socketPath)
 		}
 		httpTransport.Dial = unixDial
-		// Override the main URL object so the HTTP lib won't complain
+		// OverrIDe the main URL object so the HTTP lib won't complain
 		u.Scheme = "http"
 		u.Host = "unix.sock"
 	}
