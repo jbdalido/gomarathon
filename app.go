@@ -8,12 +8,12 @@ import (
 * Application requests
  */
 
-// List all apps
+// ListApps is listing all apps
 func (c *Client) ListApps() (*Response, error) {
 	return c.ListAppsByCmd("")
 }
 
-// List apps by cmd filter
+// ListAppsByCmd list all apps by cmd filter
 func (c *Client) ListAppsByCmd(filter string) (*Response, error) {
 	options := &RequestOptions{
 		Path: fmt.Sprintf("apps"),
@@ -28,7 +28,7 @@ func (c *Client) ListAppsByCmd(filter string) (*Response, error) {
 	return r, nil
 }
 
-// List app versions
+// ListAppVersions list app versions from a define appid
 func (c *Client) ListAppVersions(appID string) (*Response, error) {
 	options := &RequestOptions{
 		Path: fmt.Sprintf("apps/%s/versions", appID),
@@ -40,7 +40,7 @@ func (c *Client) ListAppVersions(appID string) (*Response, error) {
 	return r, nil
 }
 
-// Get a single app with production version
+// GetApp gets a single app with production version
 func (c *Client) GetApp(appID string) (*Response, error) {
 	options := &RequestOptions{
 		Path: fmt.Sprintf("apps/%s", appID),
@@ -55,7 +55,7 @@ func (c *Client) GetApp(appID string) (*Response, error) {
 	return r, nil
 }
 
-// Get a single version from a single app
+// GetAppVersion get a single version from a single app
 func (c *Client) GetAppVersion(appID string, version string) (*Response, error) {
 	options := &RequestOptions{
 		Path: fmt.Sprintf("apps/%s/versions/%s", appID, version),
@@ -70,7 +70,7 @@ func (c *Client) GetAppVersion(appID string, version string) (*Response, error) 
 	return r, nil
 }
 
-// Create a new application
+// CreateApp Create a new Application
 func (c *Client) CreateApp(app *Application) (*Response, error) {
 	// TODO : VALIDATE DATAS
 	options := &RequestOptions{
@@ -87,7 +87,7 @@ func (c *Client) CreateApp(app *Application) (*Response, error) {
 	return nil, err
 }
 
-// Update Application, thoses changes are made for the next running app and does
+// UpdateApp update the app but thoses changes are made for the next running app and does
 // not shut down the production applications
 func (c *Client) UpdateApp(appID string, app *Application) (*Response, error) {
 	options := &RequestOptions{
@@ -105,7 +105,7 @@ func (c *Client) UpdateApp(appID string, app *Application) (*Response, error) {
 
 }
 
-// Delete this app from the cluster
+// DeleteApp delete this app from the cluster
 func (c *Client) DeleteApp(appID string) (*Response, error) {
 	options := &RequestOptions{
 		Path:   fmt.Sprintf("apps/%s", appID),

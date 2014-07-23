@@ -5,7 +5,7 @@ import (
 	"net/url"
 )
 
-// Register a new callback url
+// RegisterCallbackURL register a new callback url
 func (c *Client) RegisterCallbackURL(uri string) (*Response, error) {
 	options := &RequestOptions{
 		Path:   "eventSubscriptions",
@@ -23,7 +23,7 @@ func (c *Client) RegisterCallbackURL(uri string) (*Response, error) {
 	return nil, err
 }
 
-// Get all registered callback url
+// GetEventSubscriptions gets all registered callback url
 func (c *Client) GetEventSubscriptions() (*Response, error) {
 	options := &RequestOptions{
 		Path: "eventSubscriptions",
@@ -33,12 +33,12 @@ func (c *Client) GetEventSubscriptions() (*Response, error) {
 		return nil, err
 	}
 	if r.Code != 200 {
-		return nil, fmt.Errorf("Request Error")
+		return nil, fmt.Errorf("request error")
 	}
 	return r, nil
 }
 
-// Delete a particular callback url
+// DeleteCallbackURL delete a particular callback url
 func (c *Client) DeleteCallbackURL(uri string) (*Response, error) {
 	options := &RequestOptions{
 		Path:   "eventSubscriptions",

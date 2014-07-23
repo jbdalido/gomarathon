@@ -22,7 +22,7 @@ type Client struct {
 
 // Actual version of the marathon api
 const (
-	ApiVersion = "/v2"
+	APIVersion = "/v2"
 )
 
 // NewClient return a pointer to the new client
@@ -79,7 +79,7 @@ func (c *Client) do(method, path string, data interface{}) ([]byte, int, error) 
 	return body, resp.StatusCode, nil
 }
 
-// Prepare the request by setting the correct methods and parameters
+// request prepare the request by setting the correct methods and parameters
 // TODO:
 // 	- find a better way to build parameters
 func (c *Client) request(options *RequestOptions) (*Response, error) {
@@ -92,7 +92,7 @@ func (c *Client) request(options *RequestOptions) (*Response, error) {
 		options.Method = "GET"
 	}
 
-	path := fmt.Sprintf("%s/%s", ApiVersion, options.Path)
+	path := fmt.Sprintf("%s/%s", APIVersion, options.Path)
 
 	if options.Params != nil {
 		v := url.Values{}

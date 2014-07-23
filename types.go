@@ -16,7 +16,7 @@ type Parameters struct {
 	CallbackURL string
 }
 
-// Representation of a full marathon response
+// Response representation of a full marathon response
 type Response struct {
 	Code     int
 	Apps     []*Application `json:"apps,omitempty"`
@@ -25,7 +25,7 @@ type Response struct {
 	Tasks    []*Task        `json:"tasks,omitempty"`
 }
 
-// Marathon application see :
+// Application marathon application see :
 // https://github.com/mesosphere/marathon/blob/master/REST.md#apps
 type Application struct {
 	ID            string            `json:"id"`
@@ -47,7 +47,7 @@ type Application struct {
 	Version       string            `json:"version,omitempty"`
 }
 
-// options are passed to container, if you want your options
+// Container, options are passed to container, if you want your options
 // to be passed at the end of your docker run
 // add // in front of the parameters you want to pass
 // Example:
@@ -58,7 +58,7 @@ type Container struct {
 	Options []string `json:"options,omitempty"`
 }
 
-// Tasks are described here:
+// HealthCheck are described here:
 // https://github.com/mesosphere/marathon/blob/master/REST.md#healthchecks
 type HealthCheck struct {
 	Protocol           string `json:"protocol,omitempty"`
@@ -69,7 +69,7 @@ type HealthCheck struct {
 	TimeoutSeconds     int    `json:"timeoutSeconds,omitempty"`
 }
 
-// Tasks are described here:
+// Task is described here:
 // https://github.com/mesosphere/marathon/blob/master/REST.md#tasks
 type Task struct {
 	appID     string `json:"appId"`
@@ -81,9 +81,9 @@ type Task struct {
 	Version   string `json:"version"`
 }
 
-// EventsSubscription are described here :
+// EventSubscription are described here :
 // https://github.com/mesosphere/marathon/blob/master/REST.md#event-subscriptions
-type EventSubscriptions struct {
+type EventSubscription struct {
 	CallbackURL  string   `json:"CallbackUrl"`
 	ClientIP     string   `json:"ClientIp"`
 	EventType    string   `json:"eventType"`

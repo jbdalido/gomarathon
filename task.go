@@ -1,10 +1,10 @@
 package gomarathon
 
 import (
-	//	"encoding/json"
 	"fmt"
 )
 
+// ListTasks get all the tasks running on the cluster
 func (c *Client) ListTasks() (*Response, error) {
 	options := &RequestOptions{
 		Path: "tasks",
@@ -16,6 +16,7 @@ func (c *Client) ListTasks() (*Response, error) {
 	return r, nil
 }
 
+// GetAppTasks get the tasks across the cluster from the appid
 func (c *Client) GetAppTasks(appID string) (*Response, error) {
 	options := &RequestOptions{
 		Path: fmt.Sprintf("apps/%s/tasks", appID),
@@ -27,6 +28,7 @@ func (c *Client) GetAppTasks(appID string) (*Response, error) {
 	return r, nil
 }
 
+// KillTasks will kill the tasks from the host for the appid
 func (c *Client) KillTasks(appID string, host string, scale bool) (*Response, error) {
 	options := &RequestOptions{
 		Path:   fmt.Sprintf("apps/%s/tasks", appID),
