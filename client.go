@@ -1,3 +1,5 @@
+// Package gomarathon provides a client to interact with a marathon
+// api. on http or https
 package gomarathon
 
 import (
@@ -11,6 +13,8 @@ import (
 	"net/url"
 )
 
+// Client is containing the configured http.Client
+// and the host url
 type Client struct {
 	Host       *url.URL
 	HttpClient *http.Client
@@ -20,6 +24,7 @@ const (
 	API_VERSION = "/v2"
 )
 
+// Return a pointer to the new client
 func NewClient(host string, tlsConfig *tls.Config) (*Client, error) {
 	// Validate url
 	h, err := url.Parse(host)
@@ -33,6 +38,7 @@ func NewClient(host string, tlsConfig *tls.Config) (*Client, error) {
 	}, nil
 }
 
+// do the actual prepared request in request()
 func (c *Client) do(method, path string, data interface{}) ([]byte, int, error) {
 	var params io.Reader
 	var resp *http.Response
@@ -72,6 +78,9 @@ func (c *Client) do(method, path string, data interface{}) ([]byte, int, error) 
 	return body, resp.StatusCode, nil
 }
 
+// Prepare the request by setting the correct methods and parameters
+// TODO:
+// 	- find a better way to build parameters
 func (c *Client) request(options *RequestOptions) (*Response, error) {
 
 	if options.Path == "" {
