@@ -47,7 +47,8 @@ type Application struct {
 	Version       string            `json:"version,omitempty"`
 }
 
-// Container, options are passed to container, if you want your options
+// Container is docker parameters
+// options are passed to container, if you want your options
 // to be passed at the end of your docker run
 // add // in front of the parameters you want to pass
 // Example:

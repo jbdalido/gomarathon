@@ -47,6 +47,7 @@ func (c *Client) KillTasks(appID string, host string, scale bool) (*Response, er
 	return nil, err
 }
 
+// KillTask kill a particular taskid
 func (c *Client) KillTask(appID string, taskID string, scale bool) (*Response, error) {
 	options := &RequestOptions{
 		Path:   fmt.Sprintf("apps/%s/tasks/%s", appID, taskID),
