@@ -73,7 +73,7 @@ type HealthCheck struct {
 // Task is described here:
 // https://github.com/mesosphere/marathon/blob/master/REST.md#tasks
 type Task struct {
-	appID     string `json:"appId"`
+	AppID     string `json:"appId"`
 	Host      string `json:"host"`
 	ID        string `json:"id"`
 	Ports     []int  `json:"ports"`
