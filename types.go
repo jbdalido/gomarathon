@@ -36,7 +36,7 @@ type Application struct {
 	Env           map[string]string `json:"env,omitempty"`
 	Executor      string            `json:"executor,omitempty"`
 	HealtChecks   []*HealthCheck    `json:"healtChecks,omitempty"`
-	Instances     int               `json:"instance,omitemptys"`
+	Instances     int               `json:"instances,omitemptys"`
 	Mem           float32           `json:"mem,omitempty"`
 	Tasks         []*Task           `json:"tasks,omitempty"`
 	Ports         []int             `json:"ports,omitempty"`
