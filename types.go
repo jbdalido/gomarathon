@@ -32,7 +32,7 @@ type Application struct {
 	Cmd           string            `json:"cmd,omitempty"`
 	Constraints   [][]string        `json:"constraints,omitempty"`
 	Container     *Container        `json:"container,omitempty"`
-	CPU           int               `json:"cpu,omitempty"`
+	CPU           int               `json:"cpus,omitempty"`
 	Env           map[string]string `json:"env,omitempty"`
 	Executor      string            `json:"executor,omitempty"`
 	HealtChecks   []*HealthCheck    `json:"healtChecks,omitempty"`
