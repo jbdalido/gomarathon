@@ -32,7 +32,7 @@ type Application struct {
 	Cmd           string            `json:"cmd,omitempty"`
 	Constraints   [][]string        `json:"constraints,omitempty"`
 	Container     *Container        `json:"container,omitempty"`
-	CPU           int               `json:"cpus,omitempty"`
+	CPUs          float32           `json:"cpus,omitempty"`
 	Env           map[string]string `json:"env,omitempty"`
 	Executor      string            `json:"executor,omitempty"`
 	HealtChecks   []*HealthCheck    `json:"healtChecks,omitempty"`
@@ -40,7 +40,7 @@ type Application struct {
 	Mem           float32           `json:"mem,omitempty"`
 	Tasks         []*Task           `json:"tasks,omitempty"`
 	Ports         []int             `json:"ports,omitempty"`
-	BackoffFactor int               `json:"backoffFactor,omitempty"`
+	BackoffFactor float32           `json:"backoffFactor,omitempty"`
 	TasksRunning  int               `json:"tasksRunning,omitempty"`
 	TasksStaged   int               `json:"tasksStaged,omitempty"`
 	Uris          []string          `json:"uris,omitempty"`
