@@ -70,7 +70,7 @@ type Volume struct {
 
 // Upgrade strategy
 type UpgradeStrategy struct {
-	MinimumHealthCapacity string `json:"minimumHealthCapacity,omitempty"`
+	MinimumHealthCapacity float32 `json:"minimumHealthCapacity,omitempty"`
 }
 
 // HealthCheck are described here:
