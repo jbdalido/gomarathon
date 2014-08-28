@@ -40,6 +40,7 @@ type Application struct {
 	Mem           float32           `json:"mem,omitempty"`
 	Tasks         []*Task           `json:"tasks,omitempty"`
 	Ports         []int             `json:"ports,omitempty"`
+	RequirePorts  bool              `json:"requirePorts,omitempty"`
 	BackoffFactor float32           `json:"backoffFactor,omitempty"`
 	TasksRunning  int               `json:"tasksRunning,omitempty"`
 	TasksStaged   int               `json:"tasksStaged,omitempty"`
@@ -48,15 +49,22 @@ type Application struct {
 }
 
 // Container is docker parameters
-// options are passed to container, if you want your options
-// to be passed at the end of your docker run
-// add // in front of the parameters you want to pass
-// Example:
-// docker run -ti -p 4343:4343 mysql --listen 0.0.0.0:4343
-// options := [ "-p", "4343", "//", "--listen", "0.0.0.0:4343" ]
 type Container struct {
-	Image   string   `json:"image,omitempty"`
-	Options []string `json:"options,omitempty"`
+	Type    string    `json:"type,omitempty"`
+	Docker  *Docker   `json:"docker,omitempty"`
+	Volumes []*Volume `json:"volumes,omitempty"`
+}
+
+// Docker options
+type Docker struct {
+	Image string `json:"image,omitempty"`
+}
+
+// Container volumes
+type Volume struct {
+	ContainerPath string `json:"containerPath,omitempty"`
+	HostPath      string `json:"hostPath,omitempty"`
+	Mode          string `json:"mode,omitempty"`
 }
 
 // HealthCheck are described here:
