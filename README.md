@@ -113,3 +113,4 @@ Feel free to hack.
 ## Authors
 ==========
 Jean-Baptiste Dalido <jbdalido@gmail.com>
+Anton Lindström <https://github.com/antonlindstrom>
