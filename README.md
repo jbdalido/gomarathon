@@ -3,7 +3,17 @@ Go client for marathon
 
 [![GoDoc](https://godoc.org/github.com/jbdalido/gomarathon?status.svg)](https://godoc.org/github.com/jbdalido/gomarathon)
 
-_* This is a beta_
+Versions:
+
+ - **2014/08/30 Tag V0.1.0**: 
+   Fixed version compatible with marathon 0.6 
+
+Dev :
+
+ - **Branch marathon-0.7**: 
+   Dev version for marathon 0.7
+
+**_* This is a BETA_**
 
 This is a small go client to use with **[Marathon api v2](https://github.com/mesosphere/marathon/blob/master/REST.md)**. All endpoints are handled (EventSubscriptions have not yet been tested).
 
@@ -112,5 +122,5 @@ Feel free to hack.
 
 ## Authors
 ==========
-Jean-Baptiste Dalido <jbdalido@gmail.com>
-Anton Lindström <https://github.com/antonlindstrom>
+- Jean-Baptiste Dalido <jbdalido@gmail.com>
+- Anton Lindström <https://github.com/antonlindstrom>
