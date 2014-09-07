@@ -15,7 +15,7 @@ Dev :
 
 **_* This is a BETA_**
 
-This is a small go client to use with **[Marathon api v2](https://github.com/mesosphere/marathon/blob/master/REST.md)**. All endpoints are handled (EventSubscriptions have not yet been tested).
+This is a small go client to use with **[Marathon api v2](https://mesosphere.github.io/marathon/docs/rest-api.html)**. All endpoints are handled (EventSubscriptions have not yet been tested).
 
 Feel free to hack.
 

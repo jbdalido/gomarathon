@@ -26,7 +26,7 @@ type Response struct {
 }
 
 // Application marathon application see :
-// https://github.com/mesosphere/marathon/blob/master/REST.md#apps
+// https://mesosphere.github.io/marathon/docs/rest-api.html#apps
 type Application struct {
 	ID            string            `json:"id"`
 	Cmd           string            `json:"cmd,omitempty"`
@@ -59,8 +59,8 @@ type Container struct {
 	Options []string `json:"options,omitempty"`
 }
 
-// HealthCheck are described here:
-// https://github.com/mesosphere/marathon/blob/master/REST.md#healthchecks
+// HealthChecks are described here:
+// https://mesosphere.github.io/marathon/docs/health-checks.html
 type HealthCheck struct {
 	Protocol           string `json:"protocol,omitempty"`
 	Path               string `json:"path,omitempty"`
@@ -71,7 +71,7 @@ type HealthCheck struct {
 }
 
 // Task is described here:
-// https://github.com/mesosphere/marathon/blob/master/REST.md#tasks
+// https://mesosphere.github.io/marathon/docs/rest-api.html#tasks
 type Task struct {
 	AppID     string `json:"appId"`
 	Host      string `json:"host"`
@@ -83,7 +83,7 @@ type Task struct {
 }
 
 // EventSubscription are described here :
-// https://github.com/mesosphere/marathon/blob/master/REST.md#event-subscriptions
+// https://mesosphere.github.io/marathon/docs/rest-api.html#event-subscriptions
 type EventSubscription struct {
 	CallbackURL  string   `json:"CallbackUrl"`
 	ClientIP     string   `json:"ClientIp"`
