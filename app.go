@@ -8,6 +8,18 @@ import (
 * Application requests
  */
 
+// ListTasksByAppName list tasks for an application
+func (c *Client) ListTasksByAppName(appName string) (*Response, error) {
+	options := &RequestOptions{
+		Path: fmt.Sprintf("apps/%s/tasks", appName),
+	}
+	r, err := c.request(options)
+	if err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
 // ListApps is listing all apps
 func (c *Client) ListApps() (*Response, error) {
 	return c.ListAppsByCmd("")
