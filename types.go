@@ -58,7 +58,9 @@ type Container struct {
 
 // Docker options
 type Docker struct {
-	Image string `json:"image,omitempty"`
+	Image        string         `json:"image,omitempty"`
+	Network      string         `json:"network,omitempty"`
+	PortMappings []*PortMapping `json:"portMappings,omitempty"`
 }
 
 // Container volumes
@@ -66,6 +68,14 @@ type Volume struct {
 	ContainerPath string `json:"containerPath,omitempty"`
 	HostPath      string `json:"hostPath,omitempty"`
 	Mode          string `json:"mode,omitempty"`
+}
+
+// Container PortMappings
+type PortMapping struct {
+	ContainerPort int    `json:"containerPort,omitempty"`
+	HostPort      int    `json:"hostPort,omitempty"`
+	ServicePort   int    `json:"servicePort,omitempty"`
+	Protocol      string `json:"protocol,omitempty"`
 }
 
 // Upgrade strategy
