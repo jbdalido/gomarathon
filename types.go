@@ -28,35 +28,59 @@ type Response struct {
 // Application marathon application see :
 // https://mesosphere.github.io/marathon/docs/rest-api.html#apps
 type Application struct {
-	ID            string            `json:"id"`
-	Cmd           string            `json:"cmd,omitempty"`
-	Constraints   [][]string        `json:"constraints,omitempty"`
-	Container     *Container        `json:"container,omitempty"`
-	CPUs          float32           `json:"cpus,omitempty"`
-	Env           map[string]string `json:"env,omitempty"`
-	Executor      string            `json:"executor,omitempty"`
-	HealtChecks   []*HealthCheck    `json:"healtChecks,omitempty"`
-	Instances     int               `json:"instances,omitemptys"`
-	Mem           float32           `json:"mem,omitempty"`
-	Tasks         []*Task           `json:"tasks,omitempty"`
-	Ports         []int             `json:"ports,omitempty"`
-	BackoffFactor float32           `json:"backoffFactor,omitempty"`
-	TasksRunning  int               `json:"tasksRunning,omitempty"`
-	TasksStaged   int               `json:"tasksStaged,omitempty"`
-	Uris          []string          `json:"uris,omitempty"`
-	Version       string            `json:"version,omitempty"`
+	ID              string            `json:"id"`
+	Cmd             string            `json:"cmd,omitempty"`
+	Constraints     [][]string        `json:"constraints,omitempty"`
+	Container       *Container        `json:"container,omitempty"`
+	CPUs            float32           `json:"cpus,omitempty"`
+	Env             map[string]string `json:"env,omitempty"`
+	Executor        string            `json:"executor,omitempty"`
+	HealtChecks     []*HealthCheck    `json:"healtChecks,omitempty"`
+	Instances       int               `json:"instances,omitemptys"`
+	Mem             float32           `json:"mem,omitempty"`
+	Tasks           []*Task           `json:"tasks,omitempty"`
+	Ports           []int             `json:"ports,omitempty"`
+	RequirePorts    bool              `json:"requirePorts,omitempty"`
+	BackoffFactor   float32           `json:"backoffFactor,omitempty"`
+	TasksRunning    int               `json:"tasksRunning,omitempty"`
+	TasksStaged     int               `json:"tasksStaged,omitempty"`
+	UpgradeStrategy *UpgradeStrategy  `json:"upgradeStrategy,omitempty"`
+	Uris            []string          `json:"uris,omitempty"`
+	Version         string            `json:"version,omitempty"`
 }
 
 // Container is docker parameters
-// options are passed to container, if you want your options
-// to be passed at the end of your docker run
-// add // in front of the parameters you want to pass
-// Example:
-// docker run -ti -p 4343:4343 mysql --listen 0.0.0.0:4343
-// options := [ "-p", "4343", "//", "--listen", "0.0.0.0:4343" ]
 type Container struct {
-	Image   string   `json:"image,omitempty"`
-	Options []string `json:"options,omitempty"`
+	Type    string    `json:"type,omitempty"`
+	Docker  *Docker   `json:"docker,omitempty"`
+	Volumes []*Volume `json:"volumes,omitempty"`
+}
+
+// Docker options
+type Docker struct {
+	Image        string         `json:"image,omitempty"`
+	Network      string         `json:"network,omitempty"`
+	PortMappings []*PortMapping `json:"portMappings,omitempty"`
+}
+
+// Container volumes
+type Volume struct {
+	ContainerPath string `json:"containerPath,omitempty"`
+	HostPath      string `json:"hostPath,omitempty"`
+	Mode          string `json:"mode,omitempty"`
+}
+
+// Container PortMappings
+type PortMapping struct {
+	ContainerPort int    `json:"containerPort,omitempty"`
+	HostPort      int    `json:"hostPort,omitempty"`
+	ServicePort   int    `json:"servicePort,omitempty"`
+	Protocol      string `json:"protocol,omitempty"`
+}
+
+// Upgrade strategy
+type UpgradeStrategy struct {
+	MinimumHealthCapacity float32 `json:"minimumHealthCapacity,omitempty"`
 }
 
 // HealthChecks are described here:
