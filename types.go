@@ -35,7 +35,7 @@ type Application struct {
 	CPUs          float32           `json:"cpus,omitempty"`
 	Env           map[string]string `json:"env,omitempty"`
 	Executor      string            `json:"executor,omitempty"`
-	HealtChecks   []*HealthCheck    `json:"healtChecks,omitempty"`
+	HealthChecks  []*HealthCheck    `json:"healthChecks,omitempty"`
 	Instances     int               `json:"instances,omitemptys"`
 	Mem           float32           `json:"mem,omitempty"`
 	Tasks         []*Task           `json:"tasks,omitempty"`
@@ -59,7 +59,7 @@ type Container struct {
 	Options []string `json:"options,omitempty"`
 }
 
-// HealthChecks are described here:
+// HealthCheck is described here:
 // https://mesosphere.github.io/marathon/docs/health-checks.html
 type HealthCheck struct {
 	Protocol           string `json:"protocol,omitempty"`
