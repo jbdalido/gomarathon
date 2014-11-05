@@ -35,7 +35,7 @@ type Application struct {
 	CPUs            float32           `json:"cpus,omitempty"`
 	Env             map[string]string `json:"env,omitempty"`
 	Executor        string            `json:"executor,omitempty"`
-	HealtChecks     []*HealthCheck    `json:"healtChecks,omitempty"`
+	HealthChecks    []*HealthCheck    `json:"healthChecks,omitempty"`
 	Instances       int               `json:"instances,omitemptys"`
 	Mem             float32           `json:"mem,omitempty"`
 	Tasks           []*Task           `json:"tasks,omitempty"`
@@ -61,19 +61,19 @@ type Docker struct {
 	Image string `json:"image,omitempty"`
 }
 
-// Container volumes
+// Volume is used for mounting a host directory as a container volume
 type Volume struct {
 	ContainerPath string `json:"containerPath,omitempty"`
 	HostPath      string `json:"hostPath,omitempty"`
 	Mode          string `json:"mode,omitempty"`
 }
 
-// Upgrade strategy
+// UpgradeStrategy has a minimumHealthCapacity which defines the minimum number of healty nodes
 type UpgradeStrategy struct {
 	MinimumHealthCapacity float32 `json:"minimumHealthCapacity,omitempty"`
 }
 
-// HealthCheck are described here:
+// HealthCheck is described here:
 // https://github.com/mesosphere/marathon/blob/master/REST.md#healthchecks
 type HealthCheck struct {
 	Protocol           string `json:"protocol,omitempty"`
@@ -96,7 +96,7 @@ type Task struct {
 	Version   string `json:"version"`
 }
 
-// EventSubscription are described here :
+// EventSubscription is described here:
 // https://github.com/mesosphere/marathon/blob/master/REST.md#event-subscriptions
 type EventSubscription struct {
 	CallbackURL  string   `json:"CallbackUrl"`
