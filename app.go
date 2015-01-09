@@ -50,7 +50,7 @@ func (c *Client) GetApp(appID string) (*Response, error) {
 		return nil, err
 	}
 	if r.Code != 200 {
-		return nil, fmt.Errorf("request rrror")
+		return nil, fmt.Errorf("request error")
 	}
 	return r, nil
 }
