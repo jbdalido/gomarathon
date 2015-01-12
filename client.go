@@ -120,6 +120,8 @@ func (c *Client) request(options *RequestOptions) (*Response, error) {
 	if err != nil {
 		return nil, err
 	}
+
+
 	resp := &Response{
 		Code: code,
 	}
@@ -130,3 +132,5 @@ func (c *Client) request(options *RequestOptions) (*Response, error) {
 	}
 	return resp, nil
 }
+
+

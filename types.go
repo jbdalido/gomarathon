@@ -18,11 +18,25 @@ type Parameters struct {
 
 // Response representation of a full marathon response
 type Response struct {
-	Code     int
-	Apps     []*Application `json:"apps,omitempty"`
-	App      *Application   `json:"app,omitempty"`
-	Versions []string       `json:",omitempty"`
-	Tasks    []*Task        `json:"tasks,omitempty"`
+	Code         int
+	Apps         []*Application `json:"apps,omitempty"`
+	App          *Application   `json:"app,omitempty"`
+	Versions     []string       `json:",omitempty"`
+	Tasks        []*Task        `json:"tasks,omitempty"`
+	Dependencies []string `json:"dependencies,omitempty"`
+	Groups       []*Group `json:"groups,omitempty"`
+	ID           string `json:"id,omitempty"`
+	Version      string `json:"version,omitempty"`
+}
+
+// Group marathon group see:
+// https://mesosphere.github.io/marathon/docs/rest-api.html#groups
+type Group struct {
+	ID           string         `json:"id"`
+	Groups       []*Group       `json:"groups,omitempty"`
+	Apps         []*Application `json:"apps,omitempty"`
+	Dependencies []string       `json:"dependencies,omitempty"`
+	Version      string         `json:"version,omitempty"`
 }
 
 // Application marathon application see :
@@ -45,6 +59,7 @@ type Application struct {
 	TasksStaged   int               `json:"tasksStaged,omitempty"`
 	Uris          []string          `json:"uris,omitempty"`
 	Version       string            `json:"version,omitempty"`
+	Dependencies  []string	        `json:"dependencies,omitempty"`
 }
 
 // Container is docker parameters
@@ -55,8 +70,33 @@ type Application struct {
 // docker run -ti -p 4343:4343 mysql --listen 0.0.0.0:4343
 // options := [ "-p", "4343", "//", "--listen", "0.0.0.0:4343" ]
 type Container struct {
-	Image   string   `json:"image,omitempty"`
-	Options []string `json:"options,omitempty"`
+	Type    string    `json:"type"`
+	Docker  *Docker   `json:"docker"`
+	Volumes []*Volume `json:"volumes,omitempty"`
+	Options []string  `json:"options,omitempty"`
+}
+
+// Docker
+type Docker struct {
+	Image        string            `json:"image,omitempty"`
+	Network      string            `json:"network"`
+	PortMappings []*PortMapping    `json:"portMappings,omitempty"`
+	Privileged  bool              `json:"privileged"`
+	Parameters   map[string]string `json:"parameters,omitempty"`
+}
+
+// Volume is used for mounting a host directory as a container volume
+type Volume struct {
+	ContainerPath string `json:"containerPath,omitempty"`
+	HostPath      string `json:"hostPath,omitempty"`
+	Mode          string `json:"mode,omitempty"`
+}
+
+type PortMapping struct {
+	ContainerPort uint16 `json:"containerPort,omitempty"`
+	HostPort      uint16 `json:"hostPort"`
+	ServicePort   uint16 `json:"servicePort,omitempty"`
+	Protocol      string `json:"protocol,omitempty"`
 }
 
 // HealthCheck is described here:
