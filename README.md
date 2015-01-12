@@ -31,7 +31,7 @@ Feel free to hack.
 
     import (
         "encoding/json"
-        "github.com/jbdalido/gomarathon"
+        "github.com/jbdalido/go-marathon"
         "log"
     )
 
@@ -44,11 +44,18 @@ Feel free to hack.
 
         // Update app
         a := &gomarathon.Application{
-            Id:  "test_app",
+            ID:  "test_app",
             Mem: 515,
             Container: &gomarathon.Container{
-                Image:   "docker://jbaptiste/envspitter",
-                Options: []string{"-p", "1314:8080"},
+                Docker: &gomarathon.Docker{
+                    Image: "docker://jbaptiste/envspitter",
+                    PortMappings: []*gomarathon.PortMapping{
+                        {
+                            ContainerPort: 80,
+                            HostPort:      8080,
+                        },
+                    },
+                },
             },
         }
         r, err := c.CreateApp(a)
@@ -56,14 +63,6 @@ Feel free to hack.
             log.Fatal(err)
         }
         v, _ := json.Marshal(r)
-        log.Printf("%s", v)
-
-        // List all apps
-        r, err = c.ListApps()
-        if err != nil {
-            log.Fatal(err)
-        }
-        v, _ = json.Marshal(r)
         log.Printf("%s", v)
 
         // List all apps
@@ -119,6 +118,7 @@ Feel free to hack.
         log.Printf("%s", v)
 
     }
+
 
 ## Authors
 ==========
