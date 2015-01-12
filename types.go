@@ -26,41 +26,55 @@ type Response struct {
 }
 
 // Application marathon application see :
-// https://mesosphere.github.io/marathon/docs/rest-api.html#apps
+// https://github.com/mesosphere/marathon/blob/master/REST.md#apps
 type Application struct {
-	ID            string            `json:"id"`
-	Cmd           string            `json:"cmd,omitempty"`
-	Constraints   [][]string        `json:"constraints,omitempty"`
-	Container     *Container        `json:"container,omitempty"`
-	CPUs          float32           `json:"cpus,omitempty"`
-	Env           map[string]string `json:"env,omitempty"`
-	Executor      string            `json:"executor,omitempty"`
-	HealthChecks  []*HealthCheck    `json:"healthChecks,omitempty"`
-	Instances     int               `json:"instances,omitemptys"`
-	Mem           float32           `json:"mem,omitempty"`
-	Tasks         []*Task           `json:"tasks,omitempty"`
-	Ports         []int             `json:"ports,omitempty"`
-	BackoffFactor float32           `json:"backoffFactor,omitempty"`
-	TasksRunning  int               `json:"tasksRunning,omitempty"`
-	TasksStaged   int               `json:"tasksStaged,omitempty"`
-	Uris          []string          `json:"uris,omitempty"`
-	Version       string            `json:"version,omitempty"`
+	ID              string            `json:"id"`
+	Cmd             string            `json:"cmd,omitempty"`
+	Constraints     [][]string        `json:"constraints,omitempty"`
+	Container       *Container        `json:"container,omitempty"`
+	CPUs            float32           `json:"cpus,omitempty"`
+	Env             map[string]string `json:"env,omitempty"`
+	Executor        string            `json:"executor,omitempty"`
+	HealthChecks    []*HealthCheck    `json:"healthChecks,omitempty"`
+	Instances       int               `json:"instances,omitemptys"`
+	Mem             float32           `json:"mem,omitempty"`
+	Tasks           []*Task           `json:"tasks,omitempty"`
+	Ports           []int             `json:"ports,omitempty"`
+	RequirePorts    bool              `json:"requirePorts,omitempty"`
+	BackoffFactor   float32           `json:"backoffFactor,omitempty"`
+	TasksRunning    int               `json:"tasksRunning,omitempty"`
+	TasksStaged     int               `json:"tasksStaged,omitempty"`
+	UpgradeStrategy *UpgradeStrategy  `json:"upgradeStrategy,omitempty"`
+	Uris            []string          `json:"uris,omitempty"`
+	Version         string            `json:"version,omitempty"`
 }
 
 // Container is docker parameters
-// options are passed to container, if you want your options
-// to be passed at the end of your docker run
-// add // in front of the parameters you want to pass
-// Example:
-// docker run -ti -p 4343:4343 mysql --listen 0.0.0.0:4343
-// options := [ "-p", "4343", "//", "--listen", "0.0.0.0:4343" ]
 type Container struct {
-	Image   string   `json:"image,omitempty"`
-	Options []string `json:"options,omitempty"`
+	Type    string    `json:"type,omitempty"`
+	Docker  *Docker   `json:"docker,omitempty"`
+	Volumes []*Volume `json:"volumes,omitempty"`
+}
+
+// Docker options
+type Docker struct {
+	Image string `json:"image,omitempty"`
+}
+
+// Volume is used for mounting a host directory as a container volume
+type Volume struct {
+	ContainerPath string `json:"containerPath,omitempty"`
+	HostPath      string `json:"hostPath,omitempty"`
+	Mode          string `json:"mode,omitempty"`
+}
+
+// UpgradeStrategy has a minimumHealthCapacity which defines the minimum number of healty nodes
+type UpgradeStrategy struct {
+	MinimumHealthCapacity float32 `json:"minimumHealthCapacity,omitempty"`
 }
 
 // HealthCheck is described here:
-// https://mesosphere.github.io/marathon/docs/health-checks.html
+// https://github.com/mesosphere/marathon/blob/master/REST.md#healthchecks
 type HealthCheck struct {
 	Protocol           string `json:"protocol,omitempty"`
 	Path               string `json:"path,omitempty"`
@@ -71,7 +85,7 @@ type HealthCheck struct {
 }
 
 // Task is described here:
-// https://mesosphere.github.io/marathon/docs/rest-api.html#tasks
+// https://github.com/mesosphere/marathon/blob/master/REST.md#tasks
 type Task struct {
 	AppID     string `json:"appId"`
 	Host      string `json:"host"`
@@ -82,8 +96,8 @@ type Task struct {
 	Version   string `json:"version"`
 }
 
-// EventSubscription are described here :
-// https://mesosphere.github.io/marathon/docs/rest-api.html#event-subscriptions
+// EventSubscription is described here:
+// https://github.com/mesosphere/marathon/blob/master/REST.md#event-subscriptions
 type EventSubscription struct {
 	CallbackURL  string   `json:"CallbackUrl"`
 	ClientIP     string   `json:"ClientIp"`
