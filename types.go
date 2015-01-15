@@ -33,6 +33,7 @@ type Application struct {
 	Constraints     [][]string        `json:"constraints,omitempty"`
 	Container       *Container        `json:"container,omitempty"`
 	CPUs            float32           `json:"cpus,omitempty"`
+	Deployments     []*Deployment     `json:"deployments,omitempty"`
 	Env             map[string]string `json:"env,omitempty"`
 	Executor        string            `json:"executor,omitempty"`
 	HealthChecks    []*HealthCheck    `json:"healthChecks,omitempty"`
@@ -104,6 +105,24 @@ type Task struct {
 	StagedAt  string `json:"stagedAt"`
 	StartedAt string `json:"startedAt"`
 	Version   string `json:"version"`
+}
+
+// Deployment is described here:
+// https://mesosphere.github.io/marathon/docs/rest-api.html#get-/v2/deployments
+type Deployment struct {
+	AffectedApps   []string          `json:"affectedApps"`
+	ID             string            `json:"id"`
+	Steps          []*DeploymentStep `json:"steps"`
+	CurrentActions []*DeploymentStep `json:"currentActions"`
+	CurrentStep    int               `json:"currentStep"`
+	TotalSteps     int               `json:"totalSteps"`
+	Version        string            `json:"version"`
+}
+
+// Deployment steps
+type DeploymentStep struct {
+	Action string `json:"action"`
+	App    string `json:"app"`
 }
 
 // EventSubscription is described here:
