@@ -21,6 +21,8 @@ type Response struct {
 	Code     int
 	Apps     []*Application `json:"apps,omitempty"`
 	App      *Application   `json:"app,omitempty"`
+	Leader   string         `json:"leader,omitempty"`
+	Message  string         `json:"message,omitempty"`
 	Versions []string       `json:",omitempty"`
 	Tasks    []*Task        `json:"tasks,omitempty"`
 }
