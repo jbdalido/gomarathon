@@ -1,8 +1,6 @@
 package gomarathon
 
 import (
-//log "github.com/Sirupsen/logrus"
-//"strings"
 )
 
 /*
