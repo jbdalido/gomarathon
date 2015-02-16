@@ -1,8 +1,5 @@
 package gomarathon
 
-import (
-)
-
 /*
  * Server Info
  * https://mesosphere.github.io/marathon/docs/rest-api.html#server-info
