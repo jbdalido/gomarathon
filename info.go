@@ -22,11 +22,11 @@ func (c *Client) Leader() (*Response, error) {
 
 // DeleteLeader asks the current leader to abdicate
 func (c *Client) DeleteLeader() (*Response, error) {
-  options := &RequestOptions{
-    Path: "leader",
-    Method: "DELETE",
-  }
-  r, err := c.request(options)
+	options := &RequestOptions{
+		Path:   "leader",
+		Method: "DELETE",
+	}
+	r, err := c.request(options)
 	if err != nil {
 		return nil, err
 	}
