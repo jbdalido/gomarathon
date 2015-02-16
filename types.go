@@ -25,6 +25,15 @@ type Response struct {
 	Message  string         `json:"message,omitempty"`
 	Versions []string       `json:",omitempty"`
 	Tasks    []*Task        `json:"tasks,omitempty"`
+
+	// See ServerInfo below
+	FrameworkId    string              `json:"frameworkId,omitempty"`
+	EventSub       *InfoEventSub       `json:"event_subscriber,omitempty"`
+	HttpConfig     *InfoHttpConfig     `json:"http_config,omitempty"`
+	MarathonConfig *InfoMarathonConfig `json:"marathon_config,omitempty"`
+	Name           string              `json:"name,omitempty"`
+	Version        string              `json:"version,omitempty"`
+	ZkConfig       *InfoZkConfig       `json:"zookeeper_config,omitempty"`
 }
 
 // Application marathon application see :
@@ -134,4 +143,47 @@ type EventSubscription struct {
 	ClientIP     string   `json:"ClientIp"`
 	EventType    string   `json:"eventType"`
 	CallbackURLs []string `json:"CallbackUrls"`
+}
+
+// ServerInfo is described here:
+// https://mesosphere.github.io/marathon/docs/rest-api.html#server-info
+
+type InfoEventSub struct {
+	Type          string   `json:"type"`
+	HttpEndpoints []string `json:"http_endpoints,omitempty"`
+}
+
+type InfoMarathonConfig struct {
+	Checkpoint        bool   `json:"checkpoint"`
+	Executor          string `json:"executor"`
+	FailoverTimeout   int    `json:"failover_timeout"`
+	HA                bool   `json:"ha"`
+	Hostname          string `json:"hostname"`
+	LocalPortMin      int    `json:"local_port_min"`
+	LocalPortMax      int    `json:"local_port_max"`
+	Master            string `json:"master"`
+	MesosRole         string `json:"mesos_role"`
+	MesosUser         string `json:"mesos-user"`
+	RecInitialDelay   int    `json:"reconciliation_initial_delay"`
+	RecInterval       int    `json:"reconciliation_interval"`
+	TaskLaunchTimeout int    `json:"task_launch_timeout"`
+}
+
+type InfoHttpConfig struct {
+	AssetsPath string `json:"assets_path,omitempty"`
+	HttpPort   int    `json:"http_port"`
+	HttpsPort  int    `json:"https_port"`
+}
+
+type InfoZkConfig struct {
+	Zk              string           `json:"zk"`
+	ZkFutureTimeout *ZkFutureTimeout `json:"zk_future_timeout"`
+	ZkHosts         string           `json:"zk_hosts"`
+	ZkPath          string           `json:"zk_path"`
+	ZkState         string           `json:"zk_state"`
+	ZkTimeout       int              `json:"zk_timeout"`
+}
+
+type ZkFutureTimeout struct {
+	Duration int `json:"duration"`
 }
