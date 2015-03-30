@@ -119,3 +119,17 @@ func (c *Client) DeleteApp(appID string) (*Response, error) {
 	}
 	return nil, err
 }
+
+func (c *Client) RestartApp(appID string) (*Response, error) {
+	options := &RequestOptions{
+		Path:   fmt.Sprintf("apps/%s/restart", appID),
+		Method: "POST",
+	}
+	r, err := c.request(options)
+	if r != nil {
+		if r.Code == 204 {
+			return r, nil
+		}
+	}
+	return nil, err
+}
