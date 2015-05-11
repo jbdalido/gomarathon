@@ -18,11 +18,12 @@ type Parameters struct {
 
 // Response representation of a full marathon response
 type Response struct {
-	Code     int
-	Apps     []*Application `json:"apps,omitempty"`
-	App      *Application   `json:"app,omitempty"`
-	Versions []string       `json:",omitempty"`
-	Tasks    []*Task        `json:"tasks,omitempty"`
+	Code         int
+	Apps         []*Application `json:"apps,omitempty"`
+	App          *Application   `json:"app,omitempty"`
+	Versions     []string       `json:",omitempty"`
+	Tasks        []*Task        `json:"tasks,omitempty"`
+	DeploymentId string         `json:"deployment_id,omitempty"`
 }
 
 // Application marathon application see :

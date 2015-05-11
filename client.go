@@ -120,8 +120,16 @@ func (c *Client) request(options *RequestOptions) (*Response, error) {
 	if err != nil {
 		return nil, err
 	}
+	var f map[string]string
 	resp := &Response{
 		Code: code,
+	}
+
+	err = json.Unmarshal(data, &f)
+	if err == nil {
+		if f["deploymentId"] != "" {
+			resp.DeploymentId = f["deploymentId"]
+		}
 	}
 
 	err = json.Unmarshal(data, resp)

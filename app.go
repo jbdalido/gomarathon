@@ -97,7 +97,7 @@ func (c *Client) UpdateApp(appID string, app *Application) (*Response, error) {
 	}
 	r, err := c.request(options)
 	if r != nil {
-		if r.Code == 204 {
+		if (r.Code == 204) || (r.Code == 200) {
 			return r, nil
 		}
 	}
