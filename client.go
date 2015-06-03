@@ -21,7 +21,7 @@ type Client struct {
 }
 
 type UpdateResp struct {
-	DeploymentID string `json:"id"`
+	DeploymentID string `json:"deploymentId"`
 }
 
 // Actual version of the marathon api
