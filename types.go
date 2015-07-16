@@ -1,9 +1,5 @@
 package gomarathon
 
-import (
-	"time"
-)
-
 // RequestOptions passed for query api
 type RequestOptions struct {
 	Method string
@@ -101,12 +97,12 @@ type HealthCheck struct {
 }
 
 type HealthCheckResult struct {
-	Alive               bool      `json:"alive,omitempty"`
-	ConsecutiveFailures int       `json:"consecutiveFailures,omitempty"`
-	FirstSuccess        time.Time `json:"firstSuccess,omitempty"`
-	LastFailure         time.Time `json:"lastFailure,omitempty"`
-	LastSuccess         time.Time `json:"lastSuccess,omitempty"`
-	TaskID              string    `json:"taskId,omitempty"`
+	Alive               bool   `json:"alive,omitempty"`
+	ConsecutiveFailures int    `json:"consecutiveFailures,omitempty"`
+	FirstSuccess        string `json:"firstSuccess,omitempty"`
+	LastFailure         string `json:"lastFailure,omitempty"`
+	LastSuccess         string `json:"lastSuccess,omitempty"`
+	TaskID              string `json:"taskId,omitempty"`
 }
 
 // Task is described here:
