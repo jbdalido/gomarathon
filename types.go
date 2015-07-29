@@ -88,12 +88,13 @@ type UpgradeStrategy struct {
 // HealthCheck is described here:
 // https://github.com/mesosphere/marathon/blob/master/REST.md#healthchecks
 type HealthCheck struct {
-	Protocol           string `json:"protocol,omitempty"`
-	Path               string `json:"path,omitempty"`
-	GracePeriodSeconds int    `json:"gracePeriodSeconds,omitempty"`
-	IntervalSeconds    int    `json:"intervalSeconds,omitempty"`
-	PortIndex          int    `json:"portIndex,omitempty"`
-	TimeoutSeconds     int    `json:"timeoutSeconds,omitempty"`
+	Protocol               string `json:"protocol,omitempty"`
+	Path                   string `json:"path,omitempty"`
+	GracePeriodSeconds     int    `json:"gracePeriodSeconds,omitempty"`
+	IntervalSeconds        int    `json:"intervalSeconds,omitempty"`
+	PortIndex              int    `json:"portIndex,omitempty"`
+	TimeoutSeconds         int    `json:"timeoutSeconds,omitempty"`
+	MaxConsecutiveFailures int    `json:"maxConsecutiveFailures"`
 }
 
 type HealthCheckResult struct {
