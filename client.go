@@ -15,9 +15,15 @@ import (
 
 // Client is containing the configured http.Client
 // and the host url
+type HttpBasicAuth struct {
+  User string
+  Pass string
+}
+
 type Client struct {
 	Host       *url.URL
 	HTTPClient *http.Client
+  Auth       *HttpBasicAuth
 }
 
 type UpdateResp struct {
@@ -30,7 +36,7 @@ const (
 )
 
 // NewClient return a pointer to the new client
-func NewClient(host string, tlsConfig *tls.Config) (*Client, error) {
+func NewClient(host string, auth *HttpBasicAuth, tlsConfig *tls.Config) (*Client, error) {
 	// ValIDate url
 	h, err := url.Parse(host)
 	if err != nil {
@@ -40,6 +46,7 @@ func NewClient(host string, tlsConfig *tls.Config) (*Client, error) {
 	return &Client{
 		Host:       h,
 		HTTPClient: newHTTPClient(h, tlsConfig),
+    Auth: auth,
 	}, nil
 }
 
@@ -64,6 +71,10 @@ func (c *Client) do(method, path string, data interface{}) ([]byte, int, error) 
 	// Prepare and do the request
 	req.Header.Set("User-Agent", "gomarathon")
 	req.Header.Set("Content-Type", "application/json")
+
+  if c.Auth != nil {
+    req.SetBasicAuth(c.Auth.User, c.Auth.Pass)
+  }
 
 	resp, err = c.HTTPClient.Do(req)
 	if err != nil {
