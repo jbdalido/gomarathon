@@ -49,7 +49,7 @@ type Application struct {
 	UpgradeStrategy *UpgradeStrategy  `json:"upgradeStrategy,omitempty"`
 	Uris            []string          `json:"uris,omitempty"`
 	Version         string            `json:"version,omitempty"`
-    Labels          map[string]string `json: "labels,omitempty"`
+        Labels          map[string]string `json:"labels,omitempty"`
 }
 
 // Container is docker parameters
