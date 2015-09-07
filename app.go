@@ -127,7 +127,7 @@ func (c *Client) DeleteDeployment(deploymentID string) (*Response, error) {
 	}
 	r, err := c.request(options)
 	if r != nil {
-		if r.Code == 204 {
+		if (r.Code == 200) || (r.Code == 202) {
 			return r, nil
 		}
 	}
