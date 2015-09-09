@@ -113,7 +113,7 @@ func (c *Client) DeleteApp(appID string) (*Response, error) {
 	}
 	r, err := c.request(options)
 	if r != nil {
-		if r.Code == 204 {
+		if r.Code == 200 {
 			return r, nil
 		}
 	}
