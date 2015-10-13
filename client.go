@@ -21,7 +21,7 @@ type HttpBasicAuth struct {
 }
 
 type Client struct {
-	Host       *url.URL
+	Url string
 	HTTPClient *http.Client
   Auth       *HttpBasicAuth
 }
@@ -44,7 +44,7 @@ func NewClient(host string, auth *HttpBasicAuth, tlsConfig *tls.Config) (*Client
 	}
 
 	return &Client{
-		Host:       h,
+		Url:       h.String(),
 		HTTPClient: newHTTPClient(h, tlsConfig),
     Auth: auth,
 	}, nil
@@ -63,7 +63,7 @@ func (c *Client) do(method, path string, data interface{}) ([]byte, int, error) 
 		params = bytes.NewBuffer(buf)
 	}
 
-	req, err := http.NewRequest(method, c.Host.String()+path, params)
+	req, err := http.NewRequest(method, c.Url + path, params)
 	if err != nil {
 		return nil, -1, err
 	}
