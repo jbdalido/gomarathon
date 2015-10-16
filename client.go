@@ -16,14 +16,14 @@ import (
 // Client is containing the configured http.Client
 // and the host url
 type HttpBasicAuth struct {
-  User string
-  Pass string
+	User string
+	Pass string
 }
 
 type Client struct {
-	Url string
+	Url        string
 	HTTPClient *http.Client
-  Auth       *HttpBasicAuth
+	Auth       *HttpBasicAuth
 }
 
 type UpdateResp struct {
@@ -44,9 +44,9 @@ func NewClient(host string, auth *HttpBasicAuth, tlsConfig *tls.Config) (*Client
 	}
 
 	return &Client{
-		Url:       h.String(),
+		Url:        h.String(),
 		HTTPClient: newHTTPClient(h, tlsConfig),
-    Auth: auth,
+		Auth:       auth,
 	}, nil
 }
 
@@ -63,7 +63,7 @@ func (c *Client) do(method, path string, data interface{}) ([]byte, int, error) 
 		params = bytes.NewBuffer(buf)
 	}
 
-	req, err := http.NewRequest(method, c.Url + path, params)
+	req, err := http.NewRequest(method, c.Url+path, params)
 	if err != nil {
 		return nil, -1, err
 	}
@@ -72,9 +72,9 @@ func (c *Client) do(method, path string, data interface{}) ([]byte, int, error) 
 	req.Header.Set("User-Agent", "gomarathon")
 	req.Header.Set("Content-Type", "application/json")
 
-  if c.Auth != nil {
-    req.SetBasicAuth(c.Auth.User, c.Auth.Pass)
-  }
+	if c.Auth != nil {
+		req.SetBasicAuth(c.Auth.User, c.Auth.Pass)
+	}
 
 	resp, err = c.HTTPClient.Do(req)
 	if err != nil {
@@ -113,11 +113,11 @@ func (c *Client) request(options *RequestOptions) (*Response, error) {
 		v := url.Values{}
 
 		if options.Params.Cmd != "" {
-			v.Set("cmd", url.QueryEscape(options.Params.Cmd))
+			v.Set("cmd", options.Params.Cmd)
 		}
 
 		if options.Params.Host != "" {
-			v.Set("host", url.QueryEscape(options.Params.Host))
+			v.Set("host", options.Params.Host)
 		}
 
 		if options.Params.Scale {
@@ -125,7 +125,7 @@ func (c *Client) request(options *RequestOptions) (*Response, error) {
 		}
 
 		if options.Params.CallbackURL != "" {
-			v.Set("CallbackURL", url.QueryEscape(options.Params.CallbackURL))
+			v.Set("CallbackURL", options.Params.CallbackURL)
 		}
 
 		path = fmt.Sprintf("%s?%s", path, v.Encode())

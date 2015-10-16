@@ -2,7 +2,6 @@ package gomarathon
 
 import (
 	"fmt"
-	"net/url"
 )
 
 // RegisterCallbackURL register a new callback url
@@ -11,7 +10,7 @@ func (c *Client) RegisterCallbackURL(uri string) (*Response, error) {
 		Path:   "eventSubscriptions",
 		Method: "POST",
 		Params: &Parameters{
-			CallbackURL: url.QueryEscape(uri),
+			CallbackURL: uri,
 		},
 	}
 	r, err := c.request(options)
@@ -44,7 +43,7 @@ func (c *Client) DeleteCallbackURL(uri string) (*Response, error) {
 		Path:   "eventSubscriptions",
 		Method: "DELETE",
 		Params: &Parameters{
-			CallbackURL: url.QueryEscape(uri),
+			CallbackURL: uri,
 		},
 	}
 	r, err := c.request(options)
