@@ -97,7 +97,7 @@ func (c *Client) UpdateApp(appID string, app *Application) (*Response, error) {
 	}
 	r, err := c.request(options)
 	if r != nil {
-		if r.Code == 204 {
+		if (r.Code == 204) || (r.Code == 200) {
 			return r, nil
 		}
 	}
@@ -109,6 +109,20 @@ func (c *Client) UpdateApp(appID string, app *Application) (*Response, error) {
 func (c *Client) DeleteApp(appID string) (*Response, error) {
 	options := &RequestOptions{
 		Path:   fmt.Sprintf("apps/%s", appID),
+		Method: "DELETE",
+	}
+	r, err := c.request(options)
+	if r != nil {
+		if r.Code == 204 {
+			return r, nil
+		}
+	}
+	return nil, err
+}
+
+func (c *Client) DeleteDeployment(deploymentID string) (*Response, error) {
+	options := &RequestOptions{
+		Path:   fmt.Sprintf("deployments/%s", deploymentID),
 		Method: "DELETE",
 	}
 	r, err := c.request(options)

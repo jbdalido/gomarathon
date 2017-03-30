@@ -1,5 +1,9 @@
 package gomarathon
 
+import (
+	"time"
+)
+
 // RequestOptions passed for query api
 type RequestOptions struct {
 	Method string
@@ -18,11 +22,12 @@ type Parameters struct {
 
 // Response representation of a full marathon response
 type Response struct {
-	Code     int
-	Apps     []*Application `json:"apps,omitempty"`
-	App      *Application   `json:"app,omitempty"`
-	Versions []string       `json:",omitempty"`
-	Tasks    []*Task        `json:"tasks,omitempty"`
+	Code         int
+	Apps         []*Application `json:"apps,omitempty"`
+	App          *Application   `json:"app,omitempty"`
+	Versions     []string       `json:",omitempty"`
+	Tasks        []*Task        `json:"tasks,omitempty"`
+	DeploymentId string         `json:"deployment_id,omitempty"`
 }
 
 // Application marathon application see :
@@ -97,16 +102,26 @@ type HealthCheck struct {
 	TimeoutSeconds     int    `json:"timeoutSeconds,omitempty"`
 }
 
+type HealthCheckResult struct {
+	Alive               bool      `json:"alive,omitempty"`
+	ConsecutiveFailures int       `json:"consecutiveFailures,omitempty"`
+	FirstSuccess        time.Time `json:"firstSuccess,omitempty"`
+	LastFailure         time.Time `json:"lastFailure,omitempty"`
+	LastSuccess         time.Time `json:"lastSuccess,omitempty"`
+	TaskID              string    `json:"taskId,omitempty"`
+}
+
 // Task is described here:
 // https://github.com/mesosphere/marathon/blob/master/REST.md#tasks
 type Task struct {
-	AppID     string `json:"appId"`
-	Host      string `json:"host"`
-	ID        string `json:"id"`
-	Ports     []int  `json:"ports"`
-	StagedAt  string `json:"stagedAt"`
-	StartedAt string `json:"startedAt"`
-	Version   string `json:"version"`
+	AppID              string               `json:"appId"`
+	Host               string               `json:"host"`
+	ID                 string               `json:"id"`
+	Ports              []int                `json:"ports"`
+	StagedAt           string               `json:"stagedAt"`
+	StartedAt          string               `json:"startedAt"`
+	Version            string               `json:"version"`
+	HealthCheckResults []*HealthCheckResult `json:"healthCheckResults"`
 }
 
 // Deployment is described here:

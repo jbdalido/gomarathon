@@ -20,6 +20,10 @@ type Client struct {
 	HTTPClient *http.Client
 }
 
+type UpdateResp struct {
+	DeploymentID string `json:"deploymentId"`
+}
+
 // Actual version of the marathon api
 const (
 	APIVersion = "/v2"
@@ -122,6 +126,26 @@ func (c *Client) request(options *RequestOptions) (*Response, error) {
 	}
 	resp := &Response{
 		Code: code,
+	}
+
+	//updated
+	if resp.Code == 200 {
+		updateResp := UpdateResp{}
+		err := json.Unmarshal(data, &updateResp)
+		if err == nil {
+			resp.DeploymentId = updateResp.DeploymentID
+		} else {
+			fmt.Println("Error unmashaling data response")
+		}
+		//created
+	} else if resp.Code == 201 {
+		app := Application{}
+		err := json.Unmarshal(data, &app)
+		if err == nil {
+			resp.DeploymentId = app.Deployments[0].ID
+		} else {
+			fmt.Println("Error unmashaling data response")
+		}
 	}
 
 	err = json.Unmarshal(data, resp)
