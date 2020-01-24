@@ -24,6 +24,10 @@ Feel free to hack.
 * Tests like everywhere
 * Params building might be much more clean
 
+## NOTE
+
+This repo is no longer being maintained. Users are welcome to fork it, but we make no warranty of its functionality.
+
 ## Usage example
 ================
     
